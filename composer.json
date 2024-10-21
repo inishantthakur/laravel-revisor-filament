@@ -20,26 +20,30 @@
         }
     ],
     "require": {
-        "php": "^8.1",
+        "php": "^8.3",
         "filament/filament": "^3.0",
-        "spatie/laravel-package-tools": "^1.15.0"
+        "spatie/laravel-package-tools": "^1.16",
+        "indracollective/laravel-revisor" : "^1.0",
+        "illuminate/contracts": "^11.0"
     },
     "require-dev": {
+        "indracollective/laravel-revisor" : "^1.0",
         "laravel/pint": "^1.0",
-        "nunomaduro/collision": "^7.9",
-        "nunomaduro/larastan": "^2.0.1",
-        "orchestra/testbench": "^8.0",
-        "pestphp/pest": "^2.1",
-        "pestphp/pest-plugin-arch": "^2.0",
-        "pestphp/pest-plugin-laravel": "^2.0",
-        "phpstan/extension-installer": "^1.1",
-        "phpstan/phpstan-deprecation-rules": "^1.0",
-        "phpstan/phpstan-phpunit": "^1.0"
+        "nunomaduro/collision": "^8.1.1||^7.10.0",
+        "larastan/larastan": "^2.9",
+        "orchestra/testbench": "^9.0.0||^8.22.0",
+        "pestphp/pest": "^2.34",
+        "pestphp/pest-plugin-arch": "^2.7",
+        "pestphp/pest-plugin-laravel": "^2.3",
+        "phpstan/extension-installer": "^1.3",
+        "phpstan/phpstan-deprecation-rules": "^1.1",
+        "phpstan/phpstan-phpunit": "^1.3"
     },
     "autoload": {
         "psr-4": {
             "Indra\\RevisorFilament\\": "src/",
-            "Indra\\RevisorFilament\\Database\\Factories\\": "database/factories/"
+            "Indra\\RevisorFilament\\Database\\Factories\\": "database/factories/",
+            "Indra\\RevisorFilament\\Tests\\": "tests/"
         }
     },
     "autoload-dev": {

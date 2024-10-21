@@ -101,8 +101,8 @@ class RevisorFilamentServiceProvider extends PackageServiceProvider
     {
         return [
             // AlpineComponent::make('laravel-revisor-filament', __DIR__ . '/../resources/dist/components/laravel-revisor-filament.js'),
-            Css::make('laravel-revisor-filament-styles', __DIR__ . '/../resources/dist/laravel-revisor-filament.css'),
-            Js::make('laravel-revisor-filament-scripts', __DIR__ . '/../resources/dist/laravel-revisor-filament.js'),
+            //Css::make('laravel-revisor-filament-styles', __DIR__ . '/../resources/dist/laravel-revisor-filament.css'),
+            //Js::make('laravel-revisor-filament-scripts', __DIR__ . '/../resources/dist/laravel-revisor-filament.js'),
         ];
     }
 
@@ -146,7 +146,7 @@ class RevisorFilamentServiceProvider extends PackageServiceProvider
     protected function getMigrations(): array
     {
         return [
-            'create_laravel-revisor-filament_table',
+
         ];
     }
 }

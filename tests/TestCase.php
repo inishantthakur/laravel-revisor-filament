@@ -13,13 +13,19 @@ use Filament\Support\SupportServiceProvider;
 use Filament\Tables\TablesServiceProvider;
 use Filament\Widgets\WidgetsServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Indra\Revisor\RevisorServiceProvider;
 use Indra\RevisorFilament\RevisorFilamentServiceProvider;
+use Indra\RevisorFilament\Tests\Models\User;
+use Indra\RevisorFilament\Tests\Providers\AdminPanelProvider;
 use Livewire\LivewireServiceProvider;
+use Orchestra\Testbench\Concerns\WithWorkbench;
 use Orchestra\Testbench\TestCase as Orchestra;
 use RyanChandler\BladeCaptureDirective\BladeCaptureDirectiveServiceProvider;
 
 class TestCase extends Orchestra
 {
+    use WithWorkbench;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -27,11 +33,18 @@ class TestCase extends Orchestra
         Factory::guessFactoryNamesUsing(
             fn (string $modelName) => 'Indra\\RevisorFilament\\Database\\Factories\\' . class_basename($modelName) . 'Factory'
         );
+
+        $this->actingAs(User::create([
+            'name' => 'test',
+            'email' => 'test@test.com',
+            'password' => bcrypt('password'),
+        ]));
     }
 
     protected function getPackageProviders($app)
     {
         return [
+            AdminPanelProvider::class,
             ActionsServiceProvider::class,
             BladeCaptureDirectiveServiceProvider::class,
             BladeHeroiconsServiceProvider::class,
@@ -44,6 +57,7 @@ class TestCase extends Orchestra
             SupportServiceProvider::class,
             TablesServiceProvider::class,
             WidgetsServiceProvider::class,
+            RevisorServiceProvider::class,
             RevisorFilamentServiceProvider::class,
         ];
     }
@@ -51,10 +65,9 @@ class TestCase extends Orchestra
     public function getEnvironmentSetUp($app)
     {
         config()->set('database.default', 'testing');
+        $app['config']->set('auth.providers.users.model', User::class);
 
-        /*
-        $migration = include __DIR__.'/../database/migrations/create_laravel-revisor-filament_table.php.stub';
+        $migration = include __DIR__ . '/database/create_test_tables.php';
         $migration->up();
-        */
     }
 }
