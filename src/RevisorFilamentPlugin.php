@@ -1,15 +1,15 @@
 <?php
 
-namespace VendorName\Skeleton;
+namespace Indra\RevisorFilament;
 
 use Filament\Contracts\Plugin;
 use Filament\Panel;
 
-class SkeletonPlugin implements Plugin
+class RevisorFilamentPlugin implements Plugin
 {
     public function getId(): string
     {
-        return 'skeleton';
+        return 'laravel-revisor-filament';
     }
 
     public function register(Panel $panel): void
