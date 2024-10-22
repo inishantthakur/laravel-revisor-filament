@@ -9,8 +9,10 @@ use Filament\Tables;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
-use Indra\RevisorFilament\Filament\PublishedStatusTableColumn;
-use Indra\RevisorFilament\Tests\Pages\ListPages;
+use Indra\RevisorFilament\PublishedStatusTableColumn;
+use Indra\RevisorFilament\PublishTableAction;
+use Indra\RevisorFilament\Tests\Resources\PageResource\Pages\ListPages;
+use Indra\RevisorFilament\UnpublishTableAction;
 
 // use LiveSource\Chord\Filament\Actions\CreateChildPageTableAction;
 // use Livesource\Chord\Filament\Actions\PublishBulkAction;
@@ -47,7 +49,7 @@ class PageResource extends Resource
                     ->toggledHiddenByDefault(),
                 Tables\Columns\TextColumn::make('title')
                     ->searchable(),
-                PublishedStatusTableColumn::make('publish_status'),
+                PublishedStatusTableColumn::make('published_status'),
                 Tables\Columns\TextColumn::make('publisher.name')
                     ->label('Published')
                     ->prefix('By: ')
@@ -60,6 +62,8 @@ class PageResource extends Resource
             ->actions([
                 Tables\Actions\ActionGroup::make([
                     EditAction::make(),
+                    PublishTableAction::make(),
+                    UnpublishTableAction::make(),
                     // Tables\Actions\Action::make('versions')
                     //     ->label('History')
                     //     ->url(fn (ChordPage $record) => PageResource::getUrl('versions', ['record' => $record->{$record->getRouteKeyName()}]))

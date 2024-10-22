@@ -15,6 +15,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Indra\Revisor\Middleware\DraftMiddleware;
 use Indra\RevisorFilament\RevisorFilamentPlugin;
 use Indra\RevisorFilament\Tests\Resources\PageResource;
 
@@ -30,6 +31,7 @@ class AdminPanelProvider extends PanelProvider
             ->pages([
                 Pages\Dashboard::class,
             ])
+            ->middleware([DraftMiddleware::class], isPersistent: true)
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,

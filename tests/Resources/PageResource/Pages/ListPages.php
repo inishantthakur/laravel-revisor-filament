@@ -1,6 +1,6 @@
 <?php
 
-namespace Indra\RevisorFilament\Tests\Pages;
+namespace Indra\RevisorFilament\Tests\Resources\PageResource\Pages;
 
 use Filament\Resources\Pages\ListRecords;
 use Indra\RevisorFilament\Tests\Resources\PageResource;

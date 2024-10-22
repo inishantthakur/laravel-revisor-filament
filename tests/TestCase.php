@@ -13,6 +13,7 @@ use Filament\Support\SupportServiceProvider;
 use Filament\Tables\TablesServiceProvider;
 use Filament\Widgets\WidgetsServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Indra\Revisor\Enums\RevisorContext;
 use Indra\Revisor\RevisorServiceProvider;
 use Indra\RevisorFilament\RevisorFilamentServiceProvider;
 use Indra\RevisorFilament\Tests\Models\User;
@@ -34,11 +35,7 @@ class TestCase extends Orchestra
             fn (string $modelName) => 'Indra\\RevisorFilament\\Database\\Factories\\' . class_basename($modelName) . 'Factory'
         );
 
-        $this->actingAs(User::create([
-            'name' => 'test',
-            'email' => 'test@test.com',
-            'password' => bcrypt('password'),
-        ]));
+        $this->actingAs(User::factory()->create());
     }
 
     protected function getPackageProviders($app)
@@ -65,7 +62,8 @@ class TestCase extends Orchestra
     public function getEnvironmentSetUp($app)
     {
         config()->set('database.default', 'testing');
-        $app['config']->set('auth.providers.users.model', User::class);
+        config()->set('revisor.default_context', RevisorContext::Draft);
+        config()->set('auth.providers.users.model', User::class);
 
         $migration = include __DIR__ . '/database/create_test_tables.php';
         $migration->up();

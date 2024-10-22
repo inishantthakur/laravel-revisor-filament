@@ -4,11 +4,14 @@ namespace Indra\RevisorFilament\Tests\Models;
 
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Indra\RevisorFilament\Tests\Database\Factories\UserFactory;
 
 class User extends Authenticatable implements FilamentUser
 {
+    use HasFactory;
     use Notifiable;
 
     /**
@@ -47,5 +50,10 @@ class User extends Authenticatable implements FilamentUser
     public function canAccessPanel(Panel $panel): bool
     {
         return true;
+    }
+
+    protected static function newFactory()
+    {
+        return UserFactory::new();
     }
 }
