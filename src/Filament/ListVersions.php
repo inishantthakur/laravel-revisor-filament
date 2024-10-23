@@ -56,7 +56,7 @@ class ListVersions extends ListRecords
                 ActionGroup::make([
                     ViewVersionTableAction::make(),
                     EditAction::make()
-                        ->hidden(fn (Model&HasRevisor $record) => ! $record->is_current),
+                        ->hidden(fn (Model & HasRevisor $record) => ! $record->is_current),
                     RestoreTableAction::make(),
                     DeleteAction::make(),
                 ]),
