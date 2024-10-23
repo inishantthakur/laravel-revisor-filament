@@ -21,9 +21,9 @@ class RestoreTableAction extends Action
                 $record->restoreDraftToThisVersion();
                 $action->success();
             })
-            ->hidden(fn(HasRevisor $record) => $record->is_current)
+            ->hidden(fn (HasRevisor $record) => $record->is_current)
             ->requiresConfirmation()
-            ->successNotificationTitle(fn(HasRevisor $record) => "Version $record->version_number restored as Draft")
+            ->successNotificationTitle(fn (HasRevisor $record) => "Version $record->version_number restored as Draft")
             ->icon('heroicon-o-arrow-path');
     }
 }

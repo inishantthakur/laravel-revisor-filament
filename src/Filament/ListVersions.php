@@ -29,7 +29,7 @@ class ListVersions extends ListRecords
 
     public function getHeading(): string
     {
-        return static::$resource::getRecordTitle($this->record).' Versions';
+        return static::$resource::getRecordTitle($this->record) . ' Versions';
     }
 
     public function table(Table $table): Table
