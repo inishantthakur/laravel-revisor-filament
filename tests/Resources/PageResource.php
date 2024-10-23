@@ -9,10 +9,14 @@ use Filament\Tables;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
-use Indra\RevisorFilament\PublishedStatusTableColumn;
-use Indra\RevisorFilament\PublishTableAction;
+use Indra\RevisorFilament\Filament\ListVersionsTableAction;
+use Indra\RevisorFilament\Filament\PublishedStatusTableColumn;
+use Indra\RevisorFilament\Filament\PublishTableAction;
+use Indra\RevisorFilament\Filament\UnpublishTableAction;
+use Indra\RevisorFilament\Tests\Resources\PageResource\Pages\EditPage;
 use Indra\RevisorFilament\Tests\Resources\PageResource\Pages\ListPages;
-use Indra\RevisorFilament\UnpublishTableAction;
+use Indra\RevisorFilament\Tests\Resources\PageResource\Pages\ListPageVersions;
+use Indra\RevisorFilament\Tests\Resources\PageResource\Pages\ViewPageVersion;
 
 // use LiveSource\Chord\Filament\Actions\CreateChildPageTableAction;
 // use Livesource\Chord\Filament\Actions\PublishBulkAction;
@@ -30,6 +34,8 @@ class PageResource extends Resource
     protected static ?string $modelLabel = 'Page';
 
     protected static ?string $navigationGroup = 'Revisor';
+
+    protected static ?string $recordTitleAttribute = 'title';
 
     public static function form(Form $form): Form
     {
@@ -64,6 +70,7 @@ class PageResource extends Resource
                     EditAction::make(),
                     PublishTableAction::make(),
                     UnpublishTableAction::make(),
+                    ListVersionsTableAction::make(),
                     // Tables\Actions\Action::make('versions')
                     //     ->label('History')
                     //     ->url(fn (ChordPage $record) => PageResource::getUrl('versions', ['record' => $record->{$record->getRouteKeyName()}]))
@@ -146,10 +153,9 @@ class PageResource extends Resource
     {
         return [
             'index' => ListPages::route('/'),
-            // 'children' => PageResource\Pages\ListPages::route('/{parent}'),
-            // 'edit' => PageResource\Pages\EditPage::route('/{record}/edit'),
-            // 'versions' => PageResource\Pages\ListPageVersions::route('/{record?}/versions'),
-            // 'version' => PageResource\Pages\ViewPageVersion::route('/{record}/version/{version}'),
+            'edit' => EditPage::route('/{record}/edit'),
+            'versions' => ListPageVersions::route('/{record?}/versions'),
+            'view_version' => ViewPageVersion::route('/{record}/version/{version}'),
         ];
     }
 }

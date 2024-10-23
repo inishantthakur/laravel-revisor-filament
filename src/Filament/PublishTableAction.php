@@ -1,6 +1,6 @@
 <?php
 
-namespace Indra\RevisorFilament;
+namespace Indra\RevisorFilament\Filament;
 
 use Filament\Support\Enums\Alignment;
 use Filament\Support\Enums\MaxWidth;

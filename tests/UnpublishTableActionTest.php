@@ -1,10 +1,9 @@
 <?php
 
 use Indra\Revisor\Facades\Revisor;
+use Indra\RevisorFilament\Filament\UnpublishTableAction;
 use Indra\RevisorFilament\Tests\Models\Page;
 use Indra\RevisorFilament\Tests\Resources\PageResource\Pages\ListPages;
-use Indra\RevisorFilament\UnpublishTableAction;
-
 use function Pest\Livewire\livewire;
 
 it('only shows on published pages', function () {

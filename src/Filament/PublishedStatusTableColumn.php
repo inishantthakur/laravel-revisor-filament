@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Indra\RevisorFilament;
+namespace Indra\RevisorFilament\Filament;
 
 use Filament\Tables\Columns\TextColumn;
 use Indra\Revisor\Contracts\HasRevisor;
