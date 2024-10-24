@@ -25,9 +25,9 @@ class PublishBulkAction extends BulkAction
             ->icon(FilamentIcon::resolve('heroicon-o-arrow-up-tray') ?? 'heroicon-o-arrow-up-tray')
             ->color('success')
             ->deselectRecordsAfterCompletion()
-            ->modalHeading(fn(
+            ->modalHeading(fn (
                 Collection $records
-            ) => $records->count() === 1 ? 'Publish \''.$records->first()->title.'\'' : 'Publish pages')
+            ) => $records->count() === 1 ? 'Publish \'' . $records->first()->title . '\'' : 'Publish pages')
             ->modalIcon(FilamentIcon::resolve('heroicon-o-arrow-up-tray') ?? 'heroicon-o-arrow-up-tray')
             ->modalIconColor('success')
             ->modalDescription(
@@ -35,8 +35,8 @@ class PublishBulkAction extends BulkAction
                     $count = $records->count();
 
                     return $count === 1 ?
-                        'Are you sure you want to publish this '.$this->getModelLabel() :
-                        "Are you sure you want to publish $count ".$this->getPluralModelLabel();
+                        'Are you sure you want to publish this ' . $this->getModelLabel() :
+                        "Are you sure you want to publish $count " . $this->getPluralModelLabel();
                 }
             )
             ->modalAlignment(Alignment::Center)
@@ -44,13 +44,13 @@ class PublishBulkAction extends BulkAction
             ->modalSubmitActionLabel(__('filament-actions::modal.actions.confirm.label'))
             ->modalWidth(MaxWidth::Medium)
             ->action(function (Collection $records, array $data) {
-                $records->each(fn(HasRevisor $record) => $record->publish());
+                $records->each(fn (HasRevisor $record) => $record->publish());
                 $this->success();
             })
             ->successNotificationTitle(
-                fn(array $data, Collection $records) => isset($data['recursive']) || $records->count() > 1 ?
-                    $this->getPluralModelLabel().' published successfully' :
-                    $this->getModelLabel().' published successfully'
+                fn (array $data, Collection $records) => isset($data['recursive']) || $records->count() > 1 ?
+                    $this->getPluralModelLabel() . ' published successfully' :
+                    $this->getModelLabel() . ' published successfully'
             );
     }
 }

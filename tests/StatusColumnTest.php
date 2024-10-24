@@ -3,6 +3,7 @@
 use Indra\Revisor\Facades\Revisor;
 use Indra\RevisorFilament\Tests\Models\Page;
 use Indra\RevisorFilament\Tests\Resources\PageResource\Pages\ListPages;
+
 use function Pest\Livewire\livewire;
 
 beforeEach(function () {
@@ -19,7 +20,7 @@ it('renders correct publisher information', function () {
     livewire(ListPages::class)
         ->assertTableColumnStateSet(
             'publish_info',
-            'By '.$page->publisher->name,
+            'By ' . $page->publisher->name,
             $page
         )
         ->assertTableColumnHasDescription(

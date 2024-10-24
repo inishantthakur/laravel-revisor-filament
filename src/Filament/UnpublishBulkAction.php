@@ -26,9 +26,9 @@ class UnpublishBulkAction extends BulkAction
             ->color('warning')
             ->deselectRecordsAfterCompletion()
             ->modalHeading(
-                fn(Collection $records) => $records->count() === 1 ?
-                    'Unpublish '.$records->first()->title :
-                    'Unpublish '.$this->getPluralModelLabel()
+                fn (Collection $records) => $records->count() === 1 ?
+                    'Unpublish ' . $records->first()->title :
+                    'Unpublish ' . $this->getPluralModelLabel()
             )
             ->modalIcon(FilamentIcon::resolve('heroicon-o-arrow-down-tray') ?? 'heroicon-o-arrow-down-tray')
             ->modalIconColor('warning')
@@ -37,8 +37,8 @@ class UnpublishBulkAction extends BulkAction
                     $count = $records->count();
 
                     return $count === 1 ?
-                        'Are you sure you want to unpublish this '.$this->getModelLabel() :
-                        "Are you sure you want to unpublish $count ".$this->getPluralModelLabel();
+                        'Are you sure you want to unpublish this ' . $this->getModelLabel() :
+                        "Are you sure you want to unpublish $count " . $this->getPluralModelLabel();
                 }
             )
             ->modalAlignment(Alignment::Center)
@@ -46,13 +46,13 @@ class UnpublishBulkAction extends BulkAction
             ->modalSubmitActionLabel(__('filament-actions::modal.actions.confirm.label'))
             ->modalWidth(MaxWidth::Medium)
             ->action(function (Collection $records, array $data) {
-                $records->each(fn(HasRevisor $record) => $record->unpublish());
+                $records->each(fn (HasRevisor $record) => $record->unpublish());
                 $this->success();
             })
             ->successNotificationTitle(
-                fn(array $data, Collection $records) => $records->count() > 1 ?
-                    $this->getPluralModelLabel().' unpublished successfully' :
-                    $this->getModelLabel().' unpublished successfully'
+                fn (array $data, Collection $records) => $records->count() > 1 ?
+                    $this->getPluralModelLabel() . ' unpublished successfully' :
+                    $this->getModelLabel() . ' unpublished successfully'
             );
     }
 }
