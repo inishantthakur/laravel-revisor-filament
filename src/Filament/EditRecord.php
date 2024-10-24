@@ -2,10 +2,19 @@
 
 namespace Indra\RevisorFilament\Filament;
 
+use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord as FilamentEditRecord;
 
 class EditRecord extends FilamentEditRecord
 {
+    protected function getHeaderActions(): array
+    {
+        return [
+            ViewVersionsAction::make(),
+            DeleteAction::make(),
+        ];
+    }
+
     protected function getFormActions(): array
     {
         return [

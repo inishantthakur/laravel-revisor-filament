@@ -7,7 +7,7 @@ use Filament\Resources\Pages\Page;
 use Illuminate\Database\Eloquent\Model;
 use Indra\Revisor\Contracts\HasRevisor;
 
-class ListVersionsAction extends Action
+class ViewVersionsAction extends Action
 {
     public static function getDefaultName(): ?string
     {

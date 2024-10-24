@@ -2,26 +2,22 @@
 
 namespace Indra\RevisorFilament\Filament;
 
-use Filament\Forms\Form;
 use Filament\Resources\Pages\Concerns\InteractsWithRecord;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\DeleteAction;
-use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
-use Indra\Revisor\Contracts\HasRevisor;
 
 class ListVersions extends ListRecords
 {
     use InteractsWithRecord;
 
-    public function mount(): void
+    public function mount(int | string | null $record = null): void
     {
-        $this->record = $this->resolveRecord(request()->record);
+        $this->record = $this->resolveRecord($record ?? request()->record);
 
         $this->authorizeAccess();
     }
@@ -54,27 +50,13 @@ class ListVersions extends ListRecords
             ])
             ->actions([
                 ActionGroup::make([
-                    ViewVersionTableAction::make(),
-                    EditAction::make()
-                        ->hidden(fn (Model & HasRevisor $record) => ! $record->is_current),
-                    RestoreTableAction::make(),
+                    ViewVersionTableAction::make('view'),
+                    RevertTableAction::make(),
                     DeleteAction::make(),
                 ]),
             ])->modifyQueryUsing(function (Builder $query) use ($parent): Builder {
-                return $query->withVersionContext()->where('record_id', $parent);
-            });
-    }
-
-    protected function configureEditAction(EditAction $action): void
-    {
-        $resource = static::getResource();
-
-        $action
-            ->authorize(fn (Model $record): bool => $resource::canEdit($record->draftRecord))
-            ->form(fn (Form $form): Form => $this->form($form->columns(2)));
-
-        if ($resource::hasPage('edit')) {
-            $action->url(fn (Model $record): string => $resource::getUrl('edit', ['record' => $record->record_id]));
-        }
+                return $query->withVersionContext()
+                    ->where('record_id', $parent);
+            })->recordAction('view');
     }
 }
