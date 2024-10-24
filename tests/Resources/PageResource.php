@@ -8,10 +8,12 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Model;
 use Indra\RevisorFilament\Filament\ListVersionsTableAction;
-use Indra\RevisorFilament\Filament\PublishedStatusTableColumn;
+use Indra\RevisorFilament\Filament\PublishBulkAction;
+use Indra\RevisorFilament\Filament\PublishInfoColumn;
 use Indra\RevisorFilament\Filament\PublishTableAction;
+use Indra\RevisorFilament\Filament\StatusColumn;
+use Indra\RevisorFilament\Filament\UnpublishBulkAction;
 use Indra\RevisorFilament\Filament\UnpublishTableAction;
 use Indra\RevisorFilament\Tests\Resources\PageResource\Pages\EditPage;
 use Indra\RevisorFilament\Tests\Resources\PageResource\Pages\ListPages;
@@ -50,17 +52,9 @@ class PageResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')
-                    ->toggleable()
-                    ->toggledHiddenByDefault(),
-                Tables\Columns\TextColumn::make('title')
-                    ->searchable(),
-                PublishedStatusTableColumn::make('published_status'),
-                Tables\Columns\TextColumn::make('publisher.name')
-                    ->label('Published')
-                    ->prefix('By: ')
-                    ->description(fn (Model $record) => 'On: ' . $record->published_at)
-                    ->placeholder('-'),
+                Tables\Columns\TextColumn::make('title'),
+                StatusColumn::make('status'),
+                PublishInfoColumn::make('publish_info'),
             ])
             ->configure()
             ->filters([
@@ -71,83 +65,16 @@ class PageResource extends Resource
                     PublishTableAction::make(),
                     UnpublishTableAction::make(),
                     ListVersionsTableAction::make(),
-                    // Tables\Actions\Action::make('versions')
-                    //     ->label('History')
-                    //     ->url(fn (ChordPage $record) => PageResource::getUrl('versions', ['record' => $record->{$record->getRouteKeyName()}]))
-                    //     ->icon('heroicon-o-clock'),
-                    // Tables\Actions\Action::make('view_published')
-                    //     ->label('View Published')
-                    //     ->url(fn (ChordPage $record) => $record->getLink(true))
-                    //     ->openUrlInNewTab()
-                    //     ->icon('heroicon-o-arrow-top-right-on-square')
-                    //     ->hidden(fn (ChordPage $record) => ! $record->is_published),
-                    // Tables\Actions\Action::make('view_revision')
-                    //     ->label('View Revision')
-                    //     ->url(fn (ChordPage $record) => $record->getLink(true, $record->id))
-                    //     ->openUrlInNewTab()
-                    //     ->icon('heroicon-o-arrow-top-right-on-square')
-                    //     ->hidden(fn (ChordPage $record) => $record->isPublished()),
-                    // Tables\Actions\ActionGroup::make([
-                    //     CreateChildPageTableAction::make(),
-                    //     PublishTableAction::make(),
-                    //     UnpublishTableAction::make(),
-                    // ])->dropdown(false),
                 ]),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    // PublishBulkAction::make(),
-                    // UnpublishBulkAction::make(),
-                    // Tables\Actions\DeleteBulkAction::make(),
+                    PublishBulkAction::class::make(),
+                    UnpublishBulkAction::class::make(),
+                    Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }
-
-    public static function versionsTable(Table $table): Table
-    {
-        return $table
-            ->columns([
-                Tables\Columns\TextColumn::make('version_number')->label('Version #'),
-                Tables\Columns\TextColumn::make('title'),
-                Tables\Columns\IconColumn::make('is_current')->boolean(),
-                Tables\Columns\IconColumn::make('is_published')->boolean(),
-                // Tables\Columns\TextColumn::make('publisher.name')
-                //     ->label('Published')
-                //     ->prefix('By: ')
-                //     ->description(fn (ChordPage $record) => 'On: '.$record->published_at),
-            ])
-            ->actions([
-                Tables\Actions\ActionGroup::make([
-                    // Tables\Actions\Action::make('view')
-                    //     ->label(fn (Model $record) => $record->is_current ? 'Edit' : 'View')
-                    //     ->icon(fn (Model $record) => $record->is_current ? 'heroicon-o-pencil' : 'heroicon-o-eye')
-                    //     ->url(
-                    //         fn (Model $record) => $record->is_current ?
-                    //             static::getUrl('edit', ['record' => $record->record_id]) :
-                    //             static::getUrl('version', [
-                    //                 'record' => $record->record_id,
-                    //                 'version' => $record->id,
-                    //             ])
-                    //     ),
-                    // Tables\Actions\Action::make('restore')
-                    //     ->action(function (ChordPage $record, Tables\Actions\Action $action) {
-                    //         $record->restoreDraftToThisVersion();
-                    //         $action->success();
-                    //     })
-                    //     ->requiresConfirmation()
-                    //     ->successNotificationTitle('Page version restored as Draft')
-                    //     ->icon('heroicon-o-arrow-path'),
-                    Tables\Actions\DeleteAction::make(),
-                ]),
-            ]);
-    }
-
-    // public static function getRelations(): array
-    // {
-    //     return [
-    //         //RevisionsRelationManager::class,
-    //     ];
-    // }
 
     public static function getPages(): array
     {

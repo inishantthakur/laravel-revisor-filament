@@ -28,7 +28,7 @@ class PublishTableAction extends Action
             ->modalHeading(fn (Model $record) => "Publish '$record->title'")
             ->modalIcon(FilamentIcon::resolve('heroicon-o-arrow-up-tray') ?? 'heroicon-o-arrow-up-tray')
             ->modalIconColor('success')
-            ->modalDescription('Are you sure you want to publish this page?')
+            ->modalDescription(fn () => 'Are you sure you want to publish this page?')
             ->modalAlignment(Alignment::Center)
             ->modalFooterActionsAlignment(Alignment::Center)
             ->modalSubmitActionLabel(__('filament-actions::modal.actions.confirm.label'))

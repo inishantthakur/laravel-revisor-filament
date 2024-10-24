@@ -7,7 +7,7 @@ namespace Indra\RevisorFilament\Filament;
 use Filament\Tables\Columns\TextColumn;
 use Indra\Revisor\Contracts\HasRevisor;
 
-class PublishedStatusTableColumn extends TextColumn
+class StatusColumn extends TextColumn
 {
     protected function setUp(): void
     {
