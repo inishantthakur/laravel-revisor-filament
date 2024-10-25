@@ -82,7 +82,7 @@ class PageResource extends Resource
             'index' => ListPages::route('/'),
             'edit' => EditPage::route('/{record}/edit'),
             'versions' => ListPageVersions::route('/{record?}/versions'),
-            'view_version' => ViewPageVersion::route('/{record}/version/{version}'),
+            'view_version' => ViewPageVersion::route('/{record}/versions/{version}'),
         ];
     }
 }
