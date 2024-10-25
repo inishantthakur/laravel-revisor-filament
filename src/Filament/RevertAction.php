@@ -33,7 +33,7 @@ class RevertAction extends Action
 //                return $model::find($livewire->draft_id);
 //            })
             ->requiresConfirmation()
-            ->successNotificationTitle(fn(HasRevisor $record) => "Record reverted to version $record->version_number")
+            ->successNotificationTitle(fn (HasRevisor $record) => "Record reverted to version $record->version_number")
             ->icon('heroicon-o-arrow-path');
 
         //            ->successRedirectUrl(function (HasRevisor $record, Page $livewire) {
@@ -56,7 +56,7 @@ class RevertAction extends Action
 
     public function getRecord(): ?Model
     {
-        if (!$this->draftRecord) {
+        if (! $this->draftRecord) {
             $this->draftRecord = $this->livewire->getResource()::getModel()::find($this->livewire->draft_id);
         }
 

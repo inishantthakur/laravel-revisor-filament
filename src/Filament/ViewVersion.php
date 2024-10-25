@@ -10,7 +10,7 @@ use Indra\Revisor\Facades\Revisor;
 
 class ViewVersion extends ViewRecord
 {
-    public string|int|null $draft_id = null;
+    public string | int | null $draft_id = null;
 
     public function getHeaderActions(): array
     {
@@ -19,7 +19,7 @@ class ViewVersion extends ViewRecord
         ];
     }
 
-    public function mount(int|string $record, int|string|null $version = null): void
+    public function mount(int | string $record, int | string | null $version = null): void
     {
         if (! $version) {
             abort(404);
@@ -34,7 +34,7 @@ class ViewVersion extends ViewRecord
         }
     }
 
-    protected function resolveRecord(int|string $key): Model
+    protected function resolveRecord(int | string $key): Model
     {
         return Revisor::withVersionContext(fn () => parent::resolveRecord($key));
     }
