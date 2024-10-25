@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ViewVersion extends ViewRecord
 {
-    public int|string|null $version;
+    public int | string | null $version;
 
     protected ?Model $versionRecord = null;
 
@@ -21,32 +21,32 @@ class ViewVersion extends ViewRecord
         ];
     }
 
-    public function getRecordTitle(): string|Htmlable
+    public function getRecordTitle(): string | Htmlable
     {
         $resource = static::getResource();
 
-        if (!$resource::hasRecordTitle()) {
+        if (! $resource::hasRecordTitle()) {
             return $resource::getTitleCaseModelLabel();
         }
 
         return $resource::getRecordTitle($this->getVersionRecord());
     }
 
-    public function mount(int|string $record, int|string|null $version = null): void
+    public function mount(int | string $record, int | string | null $version = null): void
     {
         parent::mount($record);
 
         $this->versionRecord = $this->resolveVersion($version);
     }
 
-    protected function resolveVersion(int|string|null $version): Model
+    protected function resolveVersion(int | string $key): Model
     {
         return $this->getRecord()->versionRecords()->findOrFail($version);
     }
 
     public function getVersionRecord(): Model
     {
-        if (!$this->versionRecord) {
+        if (! $this->versionRecord) {
             $this->versionRecord = $this->resolveVersion($this->version);
         }
 
