@@ -5,12 +5,14 @@ declare(strict_types=1);
 namespace Indra\RevisorFilament\Filament;
 
 use Filament\Resources\Pages\ViewRecord;
+use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Model;
-use Indra\Revisor\Facades\Revisor;
 
 class ViewVersion extends ViewRecord
 {
-    public string | int | null $draft_id = null;
+    public int|string|null $version;
+
+    protected ?Model $versionRecord = null;
 
     public function getHeaderActions(): array
     {
@@ -19,23 +21,40 @@ class ViewVersion extends ViewRecord
         ];
     }
 
-    public function mount(int | string $record, int | string | null $version = null): void
+    public function getRecordTitle(): string|Htmlable
     {
-        if (! $version) {
-            abort(404);
-        }
-        $this->draft_id = $record;
-        $this->record = $this->resolveRecord($version);
+        $resource = static::getResource();
 
-        $this->authorizeAccess();
-
-        if (! $this->hasInfolist()) {
-            $this->fillForm();
+        if (!$resource::hasRecordTitle()) {
+            return $resource::getTitleCaseModelLabel();
         }
+
+        return $resource::getRecordTitle($this->getVersionRecord());
     }
 
-    protected function resolveRecord(int | string $key): Model
+    public function mount(int|string $record, int|string|null $version = null): void
     {
-        return Revisor::withVersionContext(fn () => parent::resolveRecord($key));
+        parent::mount($record);
+
+        $this->versionRecord = $this->resolveVersion($version);
+    }
+
+    protected function resolveVersion(int|string|null $version): Model
+    {
+        return $this->getRecord()->versionRecords()->findOrFail($version);
+    }
+
+    public function getVersionRecord(): Model
+    {
+        if (!$this->versionRecord) {
+            $this->versionRecord = $this->resolveVersion($this->version);
+        }
+
+        return $this->versionRecord;
+    }
+
+    protected function fillForm(): void
+    {
+        $this->fillFormWithDataAndCallHooks($this->getVersionRecord());
     }
 }
