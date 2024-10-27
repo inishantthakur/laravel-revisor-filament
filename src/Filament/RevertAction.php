@@ -3,6 +3,8 @@
 namespace Indra\RevisorFilament\Filament;
 
 use Filament\Actions\Action;
+use Filament\Notifications\Actions\Action as NotificationAction;
+use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Indra\Revisor\Contracts\HasRevisor;
 
@@ -22,9 +24,35 @@ class RevertAction extends Action
                 $record->revertToVersion($livewire->version);
                 $action->success();
             })
-            ->hidden(fn (Page $livewire) => $livewire->getVersionRecord()->is_current)
+            ->hidden(fn(Page $livewire) => $livewire->getVersionRecord()->is_current)
             ->requiresConfirmation()
-            ->successNotificationTitle(fn (HasRevisor $record) => "Record reverted to version $record->version_number")
+            ->successNotification(function (HasRevisor $record) {
+                return Notification::make()
+                    ->title("Reverted to version $record->version_number.")
+                    ->success()
+                    ->actions($this->getSuccessNotificationActions());
+            })
             ->icon('heroicon-o-arrow-path');
+    }
+
+    public function getSuccessNotificationActions(): array
+    {
+        $resource = $this->getLivewire()->getResource();
+        $record = $this->getRecord();
+        $actions = [];
+
+        if ($resource::hasPage('view')) {
+            $actions[] = NotificationAction::make('view')
+                ->label('View')
+                ->url($resource::getUrl('view', ['record' => $record->getKey()]));
+        }
+
+        if ($resource::hasPage('edit')) {
+            $actions[] = NotificationAction::make('edit')
+                ->label('Edit')
+                ->url($resource::getUrl('edit', ['record' => $record->getKey()]));
+        }
+
+        return $actions;
     }
 }

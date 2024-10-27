@@ -15,7 +15,7 @@ class ListVersions extends ListRecords
 {
     use InteractsWithRecord;
 
-    public function mount(int | string | null $record = null): void
+    public function mount(int|string|null $record = null): void
     {
         $this->record = $this->resolveRecord($record ?? request()->record);
 
@@ -29,7 +29,7 @@ class ListVersions extends ListRecords
 
     public function getHeading(): string
     {
-        return static::$resource::getRecordTitle($this->record) . ' Versions';
+        return static::$resource::getRecordTitle($this->record).' History';
     }
 
     public function table(Table $table): Table
@@ -58,5 +58,10 @@ class ListVersions extends ListRecords
                 return $query->withVersionContext()
                     ->where('record_id', $parent);
             })->recordAction('view');
+    }
+
+    public function getBreadcrumb(): ?string
+    {
+        return static::$breadcrumb ?? 'History';
     }
 }
