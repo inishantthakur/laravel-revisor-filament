@@ -6,7 +6,10 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\ActionGroup;
+use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Indra\RevisorFilament\Filament\ListVersionsTableAction;
 use Indra\RevisorFilament\Filament\PublishBulkAction;
@@ -15,21 +18,15 @@ use Indra\RevisorFilament\Filament\PublishTableAction;
 use Indra\RevisorFilament\Filament\StatusColumn;
 use Indra\RevisorFilament\Filament\UnpublishBulkAction;
 use Indra\RevisorFilament\Filament\UnpublishTableAction;
+use Indra\RevisorFilament\Tests\Models\Page;
 use Indra\RevisorFilament\Tests\Resources\PageResource\Pages\EditPage;
 use Indra\RevisorFilament\Tests\Resources\PageResource\Pages\ListPages;
 use Indra\RevisorFilament\Tests\Resources\PageResource\Pages\ListPageVersions;
 use Indra\RevisorFilament\Tests\Resources\PageResource\Pages\ViewPageVersion;
 
-// use LiveSource\Chord\Filament\Actions\CreateChildPageTableAction;
-// use Livesource\Chord\Filament\Actions\PublishBulkAction;
-// use LiveSource\Chord\Filament\Actions\PublishTableAction;
-// use Livesource\Chord\Filament\Actions\UnpublishBulkAction;
-// use LiveSource\Chord\Filament\Actions\UnpublishTableAction;
-// use LiveSource\Chord\Models\ChordPage;
-
 class PageResource extends Resource
 {
-    protected static ?string $model = \Indra\RevisorFilament\Tests\Models\Page::class;
+    protected static ?string $model = Page::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
 
@@ -52,7 +49,7 @@ class PageResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('title'),
+                TextColumn::make('title'),
                 StatusColumn::make('status'),
                 PublishInfoColumn::make('publish_info'),
             ])
@@ -60,11 +57,14 @@ class PageResource extends Resource
             ->filters([
             ])
             ->actions([
-                Tables\Actions\ActionGroup::make([
+                ActionGroup::make([
                     EditAction::make(),
-                    PublishTableAction::make(),
-                    UnpublishTableAction::make(),
-                    ListVersionsTableAction::make(),
+                    DeleteAction::make(),
+                    ActionGroup::make([
+                        PublishTableAction::make(),
+                        UnpublishTableAction::make(),
+                        ListVersionsTableAction::make(),
+                    ])->dropdown(false),
                 ]),
             ])
             ->bulkActions([

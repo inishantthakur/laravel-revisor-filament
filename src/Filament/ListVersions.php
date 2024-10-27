@@ -6,6 +6,7 @@ use Filament\Resources\Pages\Concerns\InteractsWithRecord;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
@@ -38,15 +39,18 @@ class ListVersions extends ListRecords
 
         return $table
             ->columns([
+                TextColumn::make('title'),
                 TextColumn::make('version_number')
                     ->label('Version #'),
-                TextColumn::make('title'),
                 IconColumn::make('is_current')
                     ->label('Current')
                     ->boolean(),
                 IconColumn::make('is_published')
                     ->label('Published')
                     ->boolean(),
+            ])
+            ->bulkActions([
+                DeleteBulkAction::make(),
             ])
             ->actions([
                 ActionGroup::make([
