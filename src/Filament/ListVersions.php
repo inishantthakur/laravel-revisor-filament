@@ -15,7 +15,7 @@ class ListVersions extends ListRecords
 {
     use InteractsWithRecord;
 
-    public function mount(int|string|null $record = null): void
+    public function mount(int | string | null $record = null): void
     {
         $this->record = $this->resolveRecord($record ?? request()->record);
 
@@ -29,7 +29,7 @@ class ListVersions extends ListRecords
 
     public function getHeading(): string
     {
-        return static::$resource::getRecordTitle($this->record).' History';
+        return static::$resource::getRecordTitle($this->record) . ' History';
     }
 
     public function table(Table $table): Table

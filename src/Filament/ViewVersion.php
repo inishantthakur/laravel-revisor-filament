@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ViewVersion extends ViewRecord
 {
-    public int|string|null $version;
+    public int | string | null $version;
 
     protected ?Model $versionRecord = null;
 
@@ -20,21 +20,21 @@ class ViewVersion extends ViewRecord
         ];
     }
 
-    public function mount(int|string $record, int|string|null $version = null): void
+    public function mount(int | string $record, int | string | null $version = null): void
     {
         parent::mount($record);
 
         $this->versionRecord = $this->resolveVersion($version);
     }
 
-    protected function resolveVersion(int|string $id): Model
+    protected function resolveVersion(int | string $id): Model
     {
         return $this->getRecord()->versionRecords()->findOrFail($id);
     }
 
     public function getVersionRecord(): Model
     {
-        if (!$this->versionRecord) {
+        if (! $this->versionRecord) {
             $this->versionRecord = $this->resolveVersion($this->version);
         }
 
@@ -48,7 +48,7 @@ class ViewVersion extends ViewRecord
 
     public function getBreadcrumb(): string
     {
-        return static::$breadcrumb ?? 'Version #'.$this->getVersionRecord()->version_number;
+        return static::$breadcrumb ?? 'Version #' . $this->getVersionRecord()->version_number;
     }
 
     public function getHeading(): string

@@ -24,7 +24,7 @@ class RevertAction extends Action
                 $record->revertToVersion($livewire->version);
                 $action->success();
             })
-            ->hidden(fn(Page $livewire) => $livewire->getVersionRecord()->is_current)
+            ->hidden(fn (Page $livewire) => $livewire->getVersionRecord()->is_current)
             ->requiresConfirmation()
             ->successNotification(function (HasRevisor $record) {
                 return Notification::make()
