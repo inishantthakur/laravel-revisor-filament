@@ -1,54 +1,41 @@
-# Robust Draft, Publishing & Versioning for Laravel Filament Resources
+# Revisor Filament
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/indracollective/laravel-revisor-filament.svg?style=flat-square)](https://packagist.org/packages/indracollective/laravel-revisor-filament)
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/indracollective/laravel-revisor-filament/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/indracollective/laravel-revisor-filament/actions?query=workflow%3Arun-tests+branch%3Amain)
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/indracollective/laravel-revisor-filament/fix-php-code-styling.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/indracollective/laravel-revisor-filament/actions?query=workflow%3A"Fix+PHP+code+styling"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/indracollective/laravel-revisor-filament.svg?style=flat-square)](https://packagist.org/packages/indracollective/laravel-revisor-filament)
 
+Instantly add robust draft, versioning, and publishing functionality to your FilamentPHP admin panel with Revisor
+Filament.
 
-
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+This package builds on [Laravel Revisor](https://github.com/indracollective/laravel-revisor), offering a collection of
+Filament Actions, Table Columns, and Page components to seamlessly integrate Revisor with FilamentPHP, a popular admin
+panel for Laravel composed of beautiful full-stack components.
 
 ## Installation
-
-You can install the package via composer:
 
 ```bash
 composer require indracollective/laravel-revisor-filament
 ```
 
-You can publish and run the migrations with:
+## Screenshots
 
-```bash
-php artisan vendor:publish --tag="laravel-revisor-filament-migrations"
-php artisan migrate
-```
+![List Records](./docs/screenshots/list_records.png)
 
-You can publish the config file with:
+☝️ Table Actions / Bulk Actions for publishing and unpublishing records, viewing the revision history in Filament
+Tables.
 
-```bash
-php artisan vendor:publish --tag="laravel-revisor-filament-config"
-```
+![Edit Records](./docs/screenshots/edit_record.png)
 
-Optionally, you can publish the views using
+☝️ Regular Actions for publishing and unpublishing records, viewing the revision history on Filament Edit pages.
 
-```bash
-php artisan vendor:publish --tag="laravel-revisor-filament-views"
-```
+![View Versions](./docs/screenshots/view_version_record.png)
 
-This is the contents of the published config file:
+☝️ View the version history of a record, and Revert to a previous versions of a record.
 
-```php
-return [
-];
-```
+## Documentation
 
-## Usage
-
-```php
-$revisorFilament = new Indra\RevisorFilament();
-echo $revisorFilament->echoPhrase('Hello, Indra!');
-```
+[laravel-revisor.indracollective.dev](https://laravel-revisor.indracollective.dev)
 
 ## Testing
 

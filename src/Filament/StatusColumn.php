@@ -27,7 +27,7 @@ class StatusColumn extends TextColumn
             ->color(fn (string $state): string => match ($state) {
                 'revised' => 'warning',
                 'published' => 'success',
-                'draft' => 'gray',
+                default => 'gray',
             });
     }
 }

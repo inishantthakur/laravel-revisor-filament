@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Indra\RevisorFilament\Filament;
 
+use Filament\Resources\Pages\Page;
 use Filament\Support\Enums\Alignment;
 use Filament\Support\Enums\MaxWidth;
 use Filament\Support\Facades\FilamentIcon;
@@ -25,9 +28,10 @@ class PublishBulkAction extends BulkAction
             ->icon(FilamentIcon::resolve('heroicon-o-arrow-up-tray') ?? 'heroicon-o-arrow-up-tray')
             ->color('success')
             ->deselectRecordsAfterCompletion()
-            ->modalHeading(fn (
-                Collection $records
-            ) => $records->count() === 1 ? 'Publish \'' . $records->first()->title . '\'' : 'Publish pages')
+            ->modalHeading(fn (Collection $records, Page $livewire) => $records->count() === 1 ?
+                'Publish '.$livewire::getResource()::getRecordTitle($records->first()) :
+                'Publish pages'
+            )
             ->modalIcon(FilamentIcon::resolve('heroicon-o-arrow-up-tray') ?? 'heroicon-o-arrow-up-tray')
             ->modalIconColor('success')
             ->modalDescription(
@@ -35,8 +39,8 @@ class PublishBulkAction extends BulkAction
                     $count = $records->count();
 
                     return $count === 1 ?
-                        'Are you sure you want to publish this ' . $this->getModelLabel() :
-                        "Are you sure you want to publish $count " . $this->getPluralModelLabel();
+                        'Are you sure you want to publish this '.$this->getModelLabel() :
+                        "Are you sure you want to publish $count ".$this->getPluralModelLabel();
                 }
             )
             ->modalAlignment(Alignment::Center)
@@ -44,13 +48,14 @@ class PublishBulkAction extends BulkAction
             ->modalSubmitActionLabel(__('filament-actions::modal.actions.confirm.label'))
             ->modalWidth(MaxWidth::Medium)
             ->action(function (Collection $records, array $data) {
+                // @phpstan-ignore-next-line
                 $records->each(fn (HasRevisor $record) => $record->publish());
                 $this->success();
             })
             ->successNotificationTitle(
                 fn (array $data, Collection $records) => isset($data['recursive']) || $records->count() > 1 ?
-                    $this->getPluralModelLabel() . ' published successfully' :
-                    $this->getModelLabel() . ' published successfully'
+                    $this->getPluralModelLabel().' published successfully' :
+                    $this->getModelLabel().' published successfully'
             );
     }
 }

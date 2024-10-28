@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Indra\RevisorFilament\Tests\Providers;
 
 use Filament\Http\Middleware\Authenticate;
@@ -16,7 +18,6 @@ use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Indra\Revisor\Middleware\DraftMiddleware;
-use Indra\RevisorFilament\RevisorFilamentPlugin;
 use Indra\RevisorFilament\Tests\Resources\PageResource;
 
 class AdminPanelProvider extends PanelProvider
@@ -45,9 +46,6 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ])
-            ->plugins([
-                RevisorFilamentPlugin::make(),
             ])
             ->resources([
                 PageResource::class => PageResource::class,

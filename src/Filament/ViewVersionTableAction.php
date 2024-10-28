@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Indra\RevisorFilament\Filament;
 
 use Filament\Resources\Pages\Page;

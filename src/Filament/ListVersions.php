@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Indra\RevisorFilament\Filament;
 
 use Filament\Resources\Pages\Concerns\InteractsWithRecord;
@@ -16,9 +18,13 @@ class ListVersions extends ListRecords
 {
     use InteractsWithRecord;
 
-    public function mount(int | string | null $record = null): void
+    public function mount(int|string|null $record = null): void
     {
-        $this->record = $this->resolveRecord($record ?? request()->record);
+        if ($record === null) {
+            throw new \InvalidArgumentException('Record is required');
+        }
+
+        $this->record = $this->resolveRecord($record);
 
         $this->authorizeAccess();
     }
@@ -30,7 +36,7 @@ class ListVersions extends ListRecords
 
     public function getHeading(): string
     {
-        return static::$resource::getRecordTitle($this->record) . ' History';
+        return static::$resource::getRecordTitle($this->record).' History';
     }
 
     public function table(Table $table): Table
@@ -59,6 +65,7 @@ class ListVersions extends ListRecords
                     DeleteAction::make(),
                 ]),
             ])->modifyQueryUsing(function (Builder $query) use ($parent): Builder {
+                // @phpstan-ignore-next-line
                 return $query->withVersionContext()
                     ->where('record_id', $parent);
             })->recordAction('view');

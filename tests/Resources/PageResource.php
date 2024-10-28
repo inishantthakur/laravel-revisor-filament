@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Indra\RevisorFilament\Tests\Resources;
 
 use Filament\Forms\Components\TextInput;

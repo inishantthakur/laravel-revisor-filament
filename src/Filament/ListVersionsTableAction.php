@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Indra\RevisorFilament\Filament;
 
 use Filament\Resources\Pages\Page;
@@ -22,7 +24,7 @@ class ListVersionsTableAction extends Action
             ->icon('heroicon-o-clock')
             ->url(function (Model $record, Page $livewire) {
                 $resource = $livewire->getResource();
-                if (! $resource::hasPage('versions')) {
+                if (!$resource::hasPage('versions')) {
                     throw new \Exception("$resource does not have a versions page defined on the Resource");
                 }
 

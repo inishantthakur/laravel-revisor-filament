@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Indra\RevisorFilament\Filament;
 
+use Filament\Resources\Pages\Page;
 use Filament\Support\Enums\Alignment;
 use Filament\Support\Enums\MaxWidth;
 use Filament\Support\Facades\FilamentIcon;
@@ -25,7 +28,9 @@ class PublishTableAction extends Action
             ->icon(FilamentIcon::resolve('heroicon-o-arrow-up-tray') ?? 'heroicon-o-arrow-up-tray')
             ->color('success')
             ->deselectRecordsAfterCompletion()
-            ->modalHeading(fn (Model $record) => "Publish '$record->title'")
+            ->modalHeading(function (Model $record, Page $livewire) {
+                return 'Publish '.$livewire::getResource()::getRecordTitle($record);
+            })
             ->modalIcon(FilamentIcon::resolve('heroicon-o-arrow-up-tray') ?? 'heroicon-o-arrow-up-tray')
             ->modalIconColor('success')
             ->modalDescription(fn () => 'Are you sure you want to publish this page?')
@@ -38,6 +43,6 @@ class PublishTableAction extends Action
                 $record->publish();
                 $this->success();
             })
-            ->successNotificationTitle(fn () => $this->getModelLabel() . ' published successfully');
+            ->successNotificationTitle(fn () => $this->getModelLabel().' published successfully');
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Indra\RevisorFilament\Filament;
 
 use Filament\Actions\Action;
@@ -15,9 +17,9 @@ class UnpublishAction extends Action
         $this
             ->name('unpublish')
             ->label('Unpublish')
-            ->hidden(fn (Model & HasRevisor $record) => ! $record->isPublished())
+            ->hidden(fn (Model&HasRevisor $record) => ! $record->isPublished())
             ->successNotificationTitle('Unpublished')
-            ->action(function (Model & HasRevisor $record) {
+            ->action(function (Model&HasRevisor $record) {
                 $record->unpublish();
                 $this->success();
             });

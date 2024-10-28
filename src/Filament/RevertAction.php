@@ -1,11 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Indra\RevisorFilament\Filament;
 
+use Exception;
 use Filament\Actions\Action;
 use Filament\Notifications\Actions\Action as NotificationAction;
 use Filament\Notifications\Notification;
-use Filament\Pages\Page;
+use Filament\Resources\Pages\Page;
 use Indra\Revisor\Contracts\HasRevisor;
 
 class RevertAction extends Action
@@ -20,11 +23,11 @@ class RevertAction extends Action
         parent::setUp();
 
         $this
-            ->action(function (HasRevisor $record, Action $action, Page $livewire) {
+            ->action(function (HasRevisor $record, Action $action, ViewVersion $livewire) {
                 $record->revertToVersion($livewire->version);
                 $action->success();
             })
-            ->hidden(fn (Page $livewire) => $livewire->getVersionRecord()->is_current)
+            ->hidden(fn (ViewVersion $livewire) => $livewire->getVersionRecord()->is_current)
             ->requiresConfirmation()
             ->successNotification(function (HasRevisor $record) {
                 return Notification::make()
@@ -35,11 +38,20 @@ class RevertAction extends Action
             ->icon('heroicon-o-arrow-path');
     }
 
+    /**
+     * @throws Exception
+     */
     public function getSuccessNotificationActions(): array
     {
-        $resource = $this->getLivewire()->getResource();
+        /** @var Page $livewire */
+        $livewire = $this->getLivewire();
+        $resource = $livewire::getResource();
         $record = $this->getRecord();
         $actions = [];
+
+        if (! $record) {
+            return $actions;
+        }
 
         if ($resource::hasPage('view')) {
             $actions[] = NotificationAction::make('view')

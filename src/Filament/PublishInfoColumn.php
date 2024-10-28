@@ -6,6 +6,7 @@ namespace Indra\RevisorFilament\Filament;
 
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Model;
+use Indra\Revisor\Contracts\HasRevisor;
 
 class PublishInfoColumn extends TextColumn
 {
@@ -13,8 +14,8 @@ class PublishInfoColumn extends TextColumn
     {
         $this
             ->label('Published')
-            ->getStateUsing(function (Model $record) {
-                return $record->publisher_name ? 'By ' . $record->publisher_name : '-';
+            ->getStateUsing(function (Model&HasRevisor $record) {
+                return $record->publisher_name ? 'By '.$record->publisher_name : '-';
             })
             ->description(function (Model $record) {
                 return $record->{config('revisor.publishing.table_columns.published_at')};
