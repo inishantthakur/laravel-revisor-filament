@@ -42,9 +42,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Indra\\RevisorFilament\\": "src/",
-            "Indra\\RevisorFilament\\Database\\Factories\\": "database/factories/",
-            "Indra\\RevisorFilament\\Tests\\": "tests/"
+            "Indra\\RevisorFilament\\": "src/"
         }
     },
     "autoload-dev": {
