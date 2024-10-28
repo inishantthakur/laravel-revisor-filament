@@ -30,8 +30,8 @@ class UnpublishBulkAction extends BulkAction
             ->deselectRecordsAfterCompletion()
             ->modalHeading(
                 fn (Collection $records, Page $livewire) => $records->count() === 1 ?
-                    'Unpublish '.$livewire::getResource()::getRecordTitle($records->first()) :
-                    'Unpublish '.$this->getPluralModelLabel()
+                    'Unpublish ' . $livewire::getResource()::getRecordTitle($records->first()) :
+                    'Unpublish ' . $this->getPluralModelLabel()
             )
             ->modalIcon(FilamentIcon::resolve('heroicon-o-arrow-down-tray') ?? 'heroicon-o-arrow-down-tray')
             ->modalIconColor('warning')
@@ -40,8 +40,8 @@ class UnpublishBulkAction extends BulkAction
                     $count = $records->count();
 
                     return $count === 1 ?
-                        'Are you sure you want to unpublish this '.$this->getModelLabel() :
-                        "Are you sure you want to unpublish $count ".$this->getPluralModelLabel();
+                        'Are you sure you want to unpublish this ' . $this->getModelLabel() :
+                        "Are you sure you want to unpublish $count " . $this->getPluralModelLabel();
                 }
             )
             ->modalAlignment(Alignment::Center)
@@ -55,8 +55,8 @@ class UnpublishBulkAction extends BulkAction
             })
             ->successNotificationTitle(
                 fn (array $data, Collection $records) => $records->count() > 1 ?
-                    $this->getPluralModelLabel().' unpublished successfully' :
-                    $this->getModelLabel().' unpublished successfully'
+                    $this->getPluralModelLabel() . ' unpublished successfully' :
+                    $this->getModelLabel() . ' unpublished successfully'
             );
     }
 }

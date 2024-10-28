@@ -21,7 +21,7 @@ class ViewVersionsAction extends Action
         parent::setUp();
 
         $this
-            ->label(fn (HasRevisor $record) => 'History ('.$record->versionRecords()->count().')')
+            ->label(fn (HasRevisor $record) => 'History (' . $record->versionRecords()->count() . ')')
             ->icon('heroicon-o-clock')
             ->url(function (Model $record, Page $livewire) {
                 $resource = $livewire->getResource();

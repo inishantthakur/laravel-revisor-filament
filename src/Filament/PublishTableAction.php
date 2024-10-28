@@ -29,7 +29,7 @@ class PublishTableAction extends Action
             ->color('success')
             ->deselectRecordsAfterCompletion()
             ->modalHeading(function (Model $record, Page $livewire) {
-                return 'Publish '.$livewire::getResource()::getRecordTitle($record);
+                return 'Publish ' . $livewire::getResource()::getRecordTitle($record);
             })
             ->modalIcon(FilamentIcon::resolve('heroicon-o-arrow-up-tray') ?? 'heroicon-o-arrow-up-tray')
             ->modalIconColor('success')
@@ -43,6 +43,6 @@ class PublishTableAction extends Action
                 $record->publish();
                 $this->success();
             })
-            ->successNotificationTitle(fn () => $this->getModelLabel().' published successfully');
+            ->successNotificationTitle(fn () => $this->getModelLabel() . ' published successfully');
     }
 }

@@ -16,8 +16,8 @@ class PublishAction extends Action
 
         $this
             ->name('publish')
-            ->label(fn(Model & HasRevisor $record) => $record->isPublished() ? 'Publish changes' : 'Publish')
-            ->hidden(fn(Model & HasRevisor $record) => $record->isPublished() && !$record->isRevised())
+            ->label(fn (Model & HasRevisor $record) => $record->isPublished() ? 'Publish changes' : 'Publish')
+            ->hidden(fn (Model & HasRevisor $record) => $record->isPublished() && ! $record->isRevised())
             ->successNotificationTitle('Published')
             ->action(function (Model & HasRevisor $record) {
                 $record->publish();
