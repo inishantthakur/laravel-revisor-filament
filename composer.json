@@ -47,7 +47,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Indra\\RevisorFilament\\Tests\\": "tests/"
+            "Indra\\RevisorFilament\\Tests\\": "tests/",
+            "Indra\\RevisorFilament\\Tests\\Database\\Factories\\": "tests/database/factories/"
         }
     },
     "scripts": {

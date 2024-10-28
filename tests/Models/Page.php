@@ -12,7 +12,9 @@ use Indra\RevisorFilament\Tests\Database\Factories\PageFactory;
 
 class Page extends Model implements HasRevisorContract
 {
+    /** @use HasFactory<PageFactory> */
     use HasFactory;
+
     use HasRevisor;
 
     protected string $baseTable = 'pages';
@@ -21,7 +23,7 @@ class Page extends Model implements HasRevisorContract
         'title',
     ];
 
-    protected static function newFactory()
+    protected static function newFactory(): PageFactory
     {
         return PageFactory::new();
     }

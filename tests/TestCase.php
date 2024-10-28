@@ -34,7 +34,9 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'Indra\\RevisorFilament\\Database\\Factories\\' . class_basename($modelName) . 'Factory'
+            fn (
+                string $modelName
+            ) => 'Indra\\RevisorFilament\\Database\\Factories\\' . class_basename($modelName) . 'Factory'
         );
 
         $this->actingAs(User::factory()->create());
@@ -67,7 +69,7 @@ class TestCase extends Orchestra
         config()->set('revisor.default_context', RevisorContext::Draft);
         config()->set('auth.providers.users.model', User::class);
 
-        $migration = include __DIR__ . '/database/create_test_tables.php';
+        $migration = include __DIR__ . '/database/migrations/create_test_tables.php';
         $migration->up();
     }
 }
