@@ -42,13 +42,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Indra\\RevisorFilament\\": "src/"
+            "Indra\\RevisorFilament\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Indra\\RevisorFilament\\Tests\\": "tests/",
-            "Indra\\RevisorFilament\\Tests\\Database\\Factories\\": "tests/database/factories/"
+            "Indra\\RevisorFilament\\Tests\\": "tests"
         }
     },
     "scripts": {

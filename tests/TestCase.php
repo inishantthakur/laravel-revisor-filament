@@ -29,6 +29,8 @@ class TestCase extends Orchestra
 {
     use WithWorkbench;
 
+    public ?User $user;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -39,10 +41,11 @@ class TestCase extends Orchestra
             ) => 'Indra\\RevisorFilament\\Database\\Factories\\' . class_basename($modelName) . 'Factory'
         );
 
-        $this->actingAs(User::factory()->create());
+        $this->user = User::create(['name' => 'Test User', 'email' => 'test@example.com']);
+        $this->actingAs($this->user);
     }
 
-    protected function getPackageProviders($app)
+    protected function getPackageProviders($app): array
     {
         return [
             AdminPanelProvider::class,
@@ -63,7 +66,7 @@ class TestCase extends Orchestra
         ];
     }
 
-    public function getEnvironmentSetUp($app)
+    public function getEnvironmentSetUp($app): void
     {
         config()->set('database.default', 'testing');
         config()->set('revisor.default_context', RevisorContext::Draft);
