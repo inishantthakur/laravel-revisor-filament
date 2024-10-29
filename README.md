@@ -2,15 +2,12 @@
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/indracollective/laravel-revisor-filament.svg?style=flat-square)](https://packagist.org/packages/indracollective/laravel-revisor-filament)
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/indracollective/laravel-revisor-filament/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/indracollective/laravel-revisor-filament/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/indracollective/laravel-revisor-filament/fix-php-code-styling.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/indracollective/laravel-revisor-filament/actions?query=workflow%3A"Fix+PHP+code+styling"+branch%3Amain)
+[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/indracollective/laravel-revisor-filament/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/indracollective/laravel-revisor-filament/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/indracollective/laravel-revisor-filament.svg?style=flat-square)](https://packagist.org/packages/indracollective/laravel-revisor-filament)
 
-Instantly add robust draft, versioning, and publishing functionality to your FilamentPHP admin panel with Revisor
-Filament.
+Instantly add robust draft, versioning, and publishing functionality to your FilamentPHP admin panel with Revisor Filament.
 
-This package builds on [Laravel Revisor](https://github.com/indracollective/laravel-revisor), offering a collection of
-Filament Actions, Table Columns, and Page components to seamlessly integrate Revisor with FilamentPHP, a popular admin
-panel for Laravel composed of beautiful full-stack components.
+This package builds on [Laravel Revisor](https://github.com/indracollective/laravel-revisor), offering a collection of Filament Actions, Table Columns, and Page components to seamlessly integrate Revisor with FilamentPHP, a popular admin panel for Laravel composed of beautiful full-stack components.
 
 ## Installation
 
@@ -22,8 +19,7 @@ composer require indracollective/laravel-revisor-filament
 
 ![List Records](./docs/screenshots/list_records.png)
 
-☝️ Table Actions / Bulk Actions for publishing and unpublishing records, viewing the revision history in Filament
-Tables.
+☝️ Table Actions / Bulk Actions for publishing and unpublishing records, viewing the revision history in Filament Tables.
 
 ![Edit Records](./docs/screenshots/edit_record.png)
 
