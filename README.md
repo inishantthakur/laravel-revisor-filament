@@ -5,9 +5,12 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/indracollective/laravel-revisor-filament/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/indracollective/laravel-revisor-filament/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/indracollective/laravel-revisor-filament.svg?style=flat-square)](https://packagist.org/packages/indracollective/laravel-revisor-filament)
 
-Instantly add robust draft, versioning, and publishing functionality to your FilamentPHP admin panel with Revisor Filament.
+Instantly add robust draft, versioning, and publishing functionality to your FilamentPHP admin panel with Revisor
+Filament.
 
-This package builds on [Laravel Revisor](https://github.com/indracollective/laravel-revisor), offering a collection of Filament Actions, Table Columns, and Page components to seamlessly integrate Revisor with FilamentPHP, a popular admin panel for Laravel composed of beautiful full-stack components.
+This package builds on [Laravel Revisor](https://github.com/indracollective/laravel-revisor), offering a collection of
+Filament Actions, Table Columns, and Page components to seamlessly integrate Revisor with FilamentPHP, a popular admin
+panel for Laravel composed of beautiful full-stack components.
 
 ## Installation
 
@@ -17,15 +20,16 @@ composer require indracollective/laravel-revisor-filament
 
 ## Screenshots
 
-![List Records](./docs/screenshots/list_records.png)
+![List Records](https://github.com/indracollective/laravel-revisor-filament/blob/ca4a7f9e753a42201ac42eb0aee00b3b3f42a919/docs/screenshots/list_records.png?raw=true)
 
-☝️ Table Actions / Bulk Actions for publishing and unpublishing records, viewing the revision history in Filament Tables.
+☝️ Table Actions / Bulk Actions for publishing and unpublishing records, viewing the revision history in Filament
+Tables.
 
-![Edit Records](./docs/screenshots/edit_record.png)
+![Edit Records](https://github.com/indracollective/laravel-revisor-filament/blob/ca4a7f9e753a42201ac42eb0aee00b3b3f42a919/docs/screenshots/edit_record.png?raw=true)
 
 ☝️ Regular Actions for publishing and unpublishing records, viewing the revision history on Filament Edit pages.
 
-![View Versions](./docs/screenshots/view_version_record.png)
+![View Versions](https://github.com/indracollective/laravel-revisor-filament/blob/ca4a7f9e753a42201ac42eb0aee00b3b3f42a919/docs/screenshots/view_version_record.png?raw=true)
 
 ☝️ View the version history of a record, and Revert to a previous versions of a record.
 
