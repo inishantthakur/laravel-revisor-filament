@@ -1,5 +1,11 @@
 {
-    "name": "indracollective/laravel-revisor-filament",
+    "name": "inishantthakur/laravel-revisor-filament",
+  "description": "Revisor integration for Filament",
+  "type": "library",
+  "license": "MIT",
+  "description": "Revisor integration for Filament",
+  "type": "library",
+  "license": "MIT",",
     "description": "Robust Draft, Publishing & Versioning for Laravel Filament Resources",
     "keywords": [
         "indracollective",
